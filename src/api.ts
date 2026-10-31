@@ -13,9 +13,13 @@ export function identify(): Promise<string> {
     if (!db) throw new Error("请先配置 Supabase");
     const { data, error } = await db.auth.getSession();
     if (error) throw error;
-    if (data.session) return data.session.user.id;
+    if (data.session) {
+      await db.realtime.setAuth(data.session.access_token);
+      return data.session.user.id;
+    }
     const signed = await db.auth.signInAnonymously();
     if (signed.error) throw signed.error;
+    await db.realtime.setAuth(signed.data.session!.access_token);
     return signed.data.user!.id;
   })().catch((e) => {
     identity = null;
