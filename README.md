@@ -2,6 +2,12 @@
 
 手机优先的中文联想游戏。React + Vite + TypeScript + Tailwind CSS；Supabase 匿名身份、Postgres RPC、Realtime；可部署到 Vercel。
 
+## 当前线上版本
+
+公开游玩地址：https://same-word-meet-erichdzz.famedonyx.chatgpt.site
+
+前端已通过 Sites 公开发布，后端使用 Supabase 项目 `mqmoowbbdejahvktbdvr`（东京区域），SQL 已执行、匿名登录已启用。详细记录见 `DEPLOYMENT.md`。Vercel 因原邮箱无法接收重新验证邮件，未完成部署。
+
 ## 本地启动
 
 要求 Node.js 22.12+、pnpm 11（或 npm）。
@@ -64,10 +70,10 @@ Vitest 单元测试验证空白和匹配比例；PGlite 在真实 Postgres 引�
 
 本地源码不等于线上部署。没有 Supabase/Vercel 项目凭证时无法代为创建项目、执行远程 SQL 或确认公网联机。
 
-## GitHub 提交与权限恢复
+## GitHub 提交状态
 
-目标 `ErichDzz/-` 的 API 元数据显示为空仓库（size=0），账号拥有 push/admin，但实际集成创建 README 与分支均返回 403 `Resource not accessible by integration`。这说明账号权限不能代表集成令牌有写入能力；本交付未上传、未创建远程分支、未提交 PR。
+源码已通过已登录的 GitHub Desktop 推送至 `ErichDzz/-` 的 `feat/game-v1` 分支，基于远端现有初始提交，未直接覆盖 main。GitHub 集成创建 PR 仍返回 403，浏览器中的 GitHub 登录尚未完成，因此尚未创建 PR。
 
-最小操作：在 GitHub 的 Installed GitHub Apps / 对应 ChatGPT/Codex GitHub 连接中，让集成获得此仓库的 **Contents: Read and write** 和 **Pull requests: Read and write** 权限（若应用本身不提供这些权限，需更换有写权限的连接或使用本机 GitHub Desktop）。重新连接后可继续让 Codex 初始化并提交 PR，无需重新授权开发。提交附带 GitHub Actions 工作流时还可能需要 Workflows 写权限；也可先不上传该工作流。
+分支：https://github.com/ErichDzz/-/tree/feat/game-v1
 
-也可在已登录 GitHub Desktop 的机器上手动完成：先在 main 创建仅含项目标题的 README 初始提交；从 main 创建 `feat/game-v1`；将本目录源文件复制进去（不复制 node_modules、dist 或 .env.local），提交并推送，创建指向 main 的 PR。main 只放初始化提交，完整实现进入开发分支。
+后续可在 GitHub 完成登录后从该分支创建指向 main 的 PR，或给 GitHub 集成授予 Contents 与 Pull requests 写权限后继续提交。不要提交 `.env.local`、node_modules 或 dist。
